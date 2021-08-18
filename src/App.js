@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { Container } from 'react-bootstrap';
+import { Redirect, Route } from 'react-router-dom';
+import Home from './Component/Home';
+import Login from './Login';
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const logginU = useSelector(state => state.loggin);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+   <div>
+     
+      <Container >
+
+            <br/>
+        
+            <Route exact path="/">
+              {logginU ? <Redirect to="/Home" /> : <Login />}
+            </Route>
+
+            <Route exact path="/Home">
+              {logginU ? <Home />: <Redirect to="/" /> }
+            </Route>    
+        
+        </Container>
+
+   </div>
+
+        );
+  } 
 
 export default App;
